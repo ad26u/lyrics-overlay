@@ -5,6 +5,8 @@
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'" />
 <title>Lyrics</title>
 <style>
+  @font-face { font-family: 'Kalam'; src: url('./fonts/Kalam-Regular.ttf') format('truetype'); font-display: block; }
+  @font-face { font-family: 'Marhey'; src: url('./fonts/Marhey.ttf') format('truetype'); font-weight: 300 700; font-display: block; }
   html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; user-select: none; }
   body { font-family: 'Segoe UI', 'SF Pro Display', 'Noto Sans Arabic', 'Geeza Pro', sans-serif; color: #fff; }
   #stage { position: absolute; inset: 0; --accent: #ffb347; --glow: #ff8c1a; --primary: #fff; }
@@ -39,9 +41,9 @@
   .style-big .w.in:last-of-type { color: #fff; }
 
   /* drawn (OMORI-like boiling hand-drawn text) */
-  .style-drawn .drawn-line { position: absolute; inset: 0; display: flex; flex-wrap: wrap; align-content: center; justify-content: flex-start;
-                             padding: 2% 4%; box-sizing: border-box; gap: 0 .35em; line-height: 1.05; color: #fff; filter: url(#boil);
-                             font-family: 'Ink Free', 'Segoe Print', 'Noteworthy', 'Marker Felt', 'Comic Sans MS', 'Noto Sans Arabic', cursive;
+  .style-drawn .drawn-line { position: absolute; inset: 0; display: flex; flex-wrap: wrap; align-content: center; justify-content: center;
+                             padding: 2% 18%; box-sizing: border-box; gap: 0 .35em; line-height: 1.05; color: #fff; filter: url(#boil);
+                             font-family: 'Kalam', 'Marhey', 'Ink Free', 'Segoe Print', 'Noteworthy', cursive;
                              text-shadow: 0 0 6px rgba(0,0,0,.55), 0 2px 14px rgba(0,0,0,.35); transition: opacity .5s; }
   .style-drawn .drawn-line[dir=rtl] { justify-content: flex-start; }
   .style-drawn .w { display: inline-block; opacity: 0; transform: translateY(8%) scale(.96); transition: opacity .18s ease-out, transform .25s ease-out; }

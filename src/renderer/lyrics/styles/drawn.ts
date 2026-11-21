@@ -59,7 +59,7 @@ export class DrawnStyle implements LyricStyle {
         this.root.append(d);
         this.lineEl = d;
         // shrink font until the line fits the window
-        let size = Math.min(this.root.clientHeight * 0.32, this.root.clientWidth * 0.16);
+        let size = Math.min(this.root.clientHeight * 0.11, this.root.clientWidth * 0.055);
         d.style.fontSize = `${size}px`;
         while (size > 18 && (d.scrollHeight > d.clientHeight || d.scrollWidth > d.clientWidth)) {
           size *= 0.9;

@@ -8,3 +8,4 @@ helpers/win-media/bin/
 helpers/win-media/obj/
 helpers/win-media/publish/
 resources/win-media.exe
+src/renderer/lyrics/fonts/*.ttf
