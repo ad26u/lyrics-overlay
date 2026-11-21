@@ -11,5 +11,6 @@ contextBridge.exposeInMainWorld('overlay', {
   onEditMode: (cb: (on: boolean) => void) => on('overlay:edit', cb),
   onSide: (cb: (side: 'left' | 'right') => void) => on('overlay:side', cb),
   finishEdit: () => ipcRenderer.send('overlay:finish-edit'),
+  resize: (factor: number) => ipcRenderer.send('overlay:resize', factor),
   setHover: (hover: boolean) => ipcRenderer.send('overlay:hover', hover),
 });

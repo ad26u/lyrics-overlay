@@ -8,6 +8,7 @@ declare global {
       onEditMode(cb: (on: boolean) => void): void;
       onSide(cb: (side: 'left' | 'right') => void): void;
       finishEdit(): void;
+      resize(factor: number): void;
       setHover(hover: boolean): void;
     };
   }

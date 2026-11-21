@@ -11,10 +11,10 @@
   .out { opacity: 0 !important; transition: opacity .6s ease; }
 
   /* edit mode */
-  #done { display: none; position: absolute; top: 8px; inset-inline-end: 8px; z-index: 10; padding: 6px 18px;
-          border: 0; border-radius: 8px; background: #fff; color: #000; font-size: 16px; cursor: pointer; }
+  #editbar { display: none; position: absolute; top: 8px; right: 8px; z-index: 10; gap: 6px; }
+  #editbar button { padding: 6px 14px; border: 0; border-radius: 8px; background: #fff; color: #000; font-size: 16px; cursor: pointer; }
   body.edit { outline: 2px dashed rgba(255,255,255,.8); outline-offset: -2px; background: rgba(0,0,0,.25); -webkit-app-region: drag; }
-  body.edit #done { display: block; -webkit-app-region: no-drag; }
+  body.edit #editbar { display: flex; -webkit-app-region: no-drag; }
 
   /* stars */
   .style-stars .stars-group { position: absolute; inset: 0; transition: opacity .6s; }
@@ -48,7 +48,7 @@
 </head>
 <body>
   <div id="stage"></div>
-  <button id="done">تم</button>
+  <div id="editbar"><button data-f="0.9">−</button><button data-f="1.1">+</button><button id="done">تم</button></div>
   <script type="module" src="./main.ts"></script>
 </body>
 </html>

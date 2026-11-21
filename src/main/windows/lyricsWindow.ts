@@ -81,7 +81,16 @@ export class LyricsWindow {
     this.win.focus();
     this.win.webContents.send('overlay:edit', true);
 
+    const onResize = (e: Electron.IpcMainEvent, factor: number) => {
+      if (e.sender !== this.win.webContents || !(factor > 0.5 && factor < 2)) return;
+      const r = this.win.getBounds();
+      const width = Math.max(240, Math.round(r.width * factor));
+      const height = Math.max(80, Math.round(r.height * factor));
+      this.win.setBounds({ x: r.x + Math.round((r.width - width) / 2), y: r.y + Math.round((r.height - height) / 2), width, height });
+    };
+    ipcMain.on('overlay:resize', onResize);
     await new Promise<void>((resolve) => ipcMain.once('overlay:finish-edit', () => resolve()));
+    ipcMain.off('overlay:resize', onResize);
 
     const r = this.win.getBounds();
     const bounds: Bounds = { ...r, displayId: screen.getDisplayMatching(r).id };

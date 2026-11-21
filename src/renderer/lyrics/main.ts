@@ -88,3 +88,6 @@ window.overlay.onStyle((name) => {
 
 window.overlay.onEditMode((on) => document.body.classList.toggle('edit', on));
 document.getElementById('done')!.addEventListener('click', () => window.overlay.finishEdit());
+document.querySelectorAll<HTMLButtonElement>('#editbar [data-f]').forEach((b) =>
+  b.addEventListener('click', () => window.overlay.resize(Number(b.dataset.f))),
+);

@@ -13,9 +13,14 @@ import { createSpotifyQueue } from './spotify/wire.ts';
 
 if (!app.requestSingleInstanceLock()) app.quit();
 
+// LYRICS_SPIKE=1 npm run dev  → only runs the wallpaper-layer spike (plan Task 2).
+const SPIKE = !!process.env.LYRICS_SPIKE;
+if (SPIKE) void import('../../scripts/spike-desktop.ts');
+
 const resources = app.isPackaged ? process.resourcesPath : join(app.getAppPath(), 'resources');
 
 app.whenReady().then(async () => {
+  if (SPIKE) return;
   if (process.platform === 'darwin') app.dock?.hide();
 
   const settingsFile = join(app.getPath('userData'), 'settings.json');
@@ -57,7 +62,7 @@ app.whenReady().then(async () => {
   orch.setEnabled(settings.enabled);
   orch.start();
 
-  screen.on('display-removed', () => app.relaunch() /* simplest way to re-clamp windows */);
+  screen.on('display-removed', () => { app.relaunch(); app.exit(0); }); // simplest way to re-clamp windows
   app.on('window-all-closed', () => { /* stay in tray */ });
   app.on('before-quit', () => { orch.stop(); source.dispose(); });
 });
