@@ -3,12 +3,14 @@ import type { LyricsCache } from './cache.ts';
 import { parseLrc } from './lrc.ts';
 
 const BASE = 'https://lrclib.net';
+const MAX_DURATION_DIFF_S = 10;
 const HEADERS = { 'User-Agent': 'LyricsOverlay/0.1 (https://github.com/ad26u)' };
 
 type LrclibRecord = { duration?: number; syncedLyrics?: string | null; plainLyrics?: string | null };
 
 export function cacheKey(np: NowPlaying): string {
-  return `${np.artist}|${np.title}|${Math.round(np.durationMs / 1000)}`.toLowerCase();
+  // v2: v1 cached false misses caused by a too-strict duration match
+  return `v2|${np.artist}|${np.title}|${Math.round(np.durationMs / 1000)}`.toLowerCase();
 }
 
 function toLyrics(rec: LrclibRecord | undefined): Lyrics | null {
@@ -42,7 +44,11 @@ export async function fetchLyrics(
       const s = await deps.fetch(search, { headers: HEADERS });
       if (!s.ok) return null;
       const list = (await s.json()) as LrclibRecord[];
-      const best = list.find((x) => x.syncedLyrics && Math.abs((x.duration ?? 0) - np.durationMs / 1000) <= 3);
+      // Different releases of a song differ by a few seconds; take the closest within 10 s.
+      const target = np.durationMs / 1000;
+      const best = list
+        .filter((x) => x.syncedLyrics && Math.abs((x.duration ?? 0) - target) <= MAX_DURATION_DIFF_S)
+        .sort((a, b) => Math.abs((a.duration ?? 0) - target) - Math.abs((b.duration ?? 0) - target))[0];
       result = toLyrics(best);
     }
     deps.cache.set(key, result);

@@ -86,8 +86,29 @@ test('sets User-Agent header', async () => {
   assert.equal(calls[0].headers.get('user-agent'), 'LyricsOverlay/0.1 (https://github.com/ad26u)');
 });
 
-test('cacheKey is lowercase artist|title|seconds', () => {
-  assert.equal(cacheKey(np), 'band|song|200');
+test('cacheKey is versioned lowercase artist|title|seconds', () => {
+  assert.equal(cacheKey(np), 'v2|band|song|200');
+});
+
+test('search accepts a different version up to 10 s longer and picks the closest', async () => {
+  // Real case: Spotify "Kiss from a Rose" is 283.2 s, LRCLIB has 287.9 / 288 / 289 s.
+  const rose = { ...np, title: 'Kiss from a Rose', artist: 'Seal', album: 'Hits', durationMs: 283173 };
+  const f = fakeFetch((u) =>
+    u.pathname === '/api/get'
+      ? json(404, {})
+      : json(200, [
+          { duration: 289, syncedLyrics: '[00:01.00]far' },
+          { duration: 287.89, syncedLyrics: '[00:01.00]closest' },
+          { duration: 310, syncedLyrics: '[00:01.00]too far' },
+        ]),
+  );
+  const res = await fetchLyrics(rose, { fetch: f, cache });
+  assert.equal(res?.lines[0].text, 'closest');
+});
+
+test('search rejects versions more than 10 s apart', async () => {
+  const f = fakeFetch((u) => (u.pathname === '/api/get' ? json(404, {}) : json(200, [{ duration: 215, syncedLyrics: '[00:01.00]x' }])));
+  assert.equal(await fetchLyrics(np, { fetch: f, cache }), null);
 });
 
 test('cache survives a new instance', async () => {
