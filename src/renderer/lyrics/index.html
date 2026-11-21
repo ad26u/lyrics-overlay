@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="ar">
+<head>
+<meta charset="utf-8" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline'" />
+<title>Lyrics</title>
+<style>
+  html, body { margin: 0; height: 100%; background: transparent; overflow: hidden; user-select: none; }
+  body { font-family: 'Segoe UI', 'SF Pro Display', 'Noto Sans Arabic', 'Geeza Pro', sans-serif; color: #fff; }
+  #stage { position: absolute; inset: 0; --accent: #ffb347; --glow: #ff8c1a; --primary: #fff; }
+  .out { opacity: 0 !important; transition: opacity .6s ease; }
+
+  /* edit mode */
+  #done { display: none; position: absolute; top: 8px; inset-inline-end: 8px; z-index: 10; padding: 6px 18px;
+          border: 0; border-radius: 8px; background: #fff; color: #000; font-size: 16px; cursor: pointer; }
+  body.edit { outline: 2px dashed rgba(255,255,255,.8); outline-offset: -2px; background: rgba(0,0,0,.25); -webkit-app-region: drag; }
+  body.edit #done { display: block; -webkit-app-region: no-drag; }
+
+  /* stars */
+  .style-stars .stars-group { position: absolute; inset: 0; transition: opacity .6s; }
+  .style-stars svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .style-stars line { stroke: var(--accent); stroke-width: 1.2; vector-effect: non-scaling-stroke; opacity: 0; transition: opacity .4s; }
+  .style-stars line.on { opacity: .7; }
+  .style-stars .star { position: absolute; transform: translate(-50%, -50%) scale(.85); display: flex; flex-direction: column;
+                       align-items: center; opacity: 0; transition: opacity .3s, transform .3s; color: var(--accent); }
+  .style-stars .star.on { opacity: .85; }
+  .style-stars .star.active { opacity: 1; transform: translate(-50%, -50%) scale(1.5); }
+  .style-stars .glyph { font-size: 14px; line-height: 1; }
+  .style-stars .label { font-size: clamp(12px, 2.2vw, 28px); font-weight: 600; white-space: nowrap; }
+  .style-stars .star.active .glyph, .style-stars .star.active .label { text-shadow: 0 0 8px var(--glow), 0 0 22px var(--glow); color: #fff3e0; }
+
+  /* big */
+  .style-big { display: flex; align-items: center; justify-content: center; }
+  .style-big .big-line { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); padding: 0 4%; text-align: center; font-family: Impact, 'Anton', 'Bebas Neue', 'Arial Black', 'Noto Kufi Arabic', sans-serif;
+                         font-size: clamp(28px, 8vw, 140px); line-height: 1; text-transform: uppercase; letter-spacing: .01em;
+                         text-shadow: 0 4px 24px rgba(0,0,0,.5); transition: opacity .4s; }
+  .style-big .w { display: inline-block; opacity: 0; transform: translateY(30%); transition: opacity .25s, transform .25s; }
+  .style-big .w.in { opacity: 1; transform: none; }
+  .style-big .w.in:last-of-type { color: #fff; }
+
+  /* simple */
+  .style-simple { display: flex; align-items: center; justify-content: center; }
+  .style-simple .simple-line { padding: 0 4%; text-align: center; font-size: clamp(18px, 4vw, 64px); font-weight: 700;
+                               text-shadow: 0 2px 12px rgba(0,0,0,.6); }
+  .style-simple .w { opacity: .7; transition: color .15s, opacity .15s; }
+  .style-simple .w.active { opacity: 1; color: var(--accent); }
+</style>
+</head>
+<body>
+  <div id="stage"></div>
+  <button id="done">تم</button>
+  <script type="module" src="./main.ts"></script>
+</body>
+</html>
