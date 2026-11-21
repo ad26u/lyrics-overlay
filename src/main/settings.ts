@@ -2,7 +2,7 @@ import { readFileSync, renameSync, writeFileSync } from 'node:fs';
 import type { AppSettings, Bounds, Rect, StyleName } from '../shared/types.ts';
 
 export const DEFAULT_SETTINGS: AppSettings = { enabled: true, style: 'stars', circleSide: 'left', openAtLogin: false };
-const STYLES: StyleName[] = ['stars', 'big', 'simple'];
+const STYLES: StyleName[] = ['stars', 'big', 'simple', 'drawn'];
 
 export function loadSettings(file: string): AppSettings {
   let raw: Partial<AppSettings>;

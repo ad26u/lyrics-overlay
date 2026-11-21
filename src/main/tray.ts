@@ -11,7 +11,7 @@ export type TrayActions = {
   setOpenAtLogin(on: boolean): void;
 };
 
-const STYLE_LABELS: Record<StyleName, string> = { stars: 'نجوم', big: 'كلمات كبيرة', simple: 'بسيط' };
+const STYLE_LABELS: Record<StyleName, string> = { stars: 'نجوم', big: 'كلمات كبيرة', simple: 'بسيط', drawn: 'مرسوم' };
 
 export class AppTray {
   private tray: Tray;

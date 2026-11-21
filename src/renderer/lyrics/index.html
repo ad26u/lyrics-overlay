@@ -38,6 +38,15 @@
   .style-big .w.in { opacity: 1; transform: none; }
   .style-big .w.in:last-of-type { color: #fff; }
 
+  /* drawn (OMORI-like boiling hand-drawn text) */
+  .style-drawn .drawn-line { position: absolute; inset: 0; display: flex; flex-wrap: wrap; align-content: center; justify-content: flex-start;
+                             padding: 2% 4%; box-sizing: border-box; gap: 0 .35em; line-height: 1.05; color: #fff; filter: url(#boil);
+                             font-family: 'Ink Free', 'Segoe Print', 'Noteworthy', 'Marker Felt', 'Comic Sans MS', 'Noto Sans Arabic', cursive;
+                             text-shadow: 0 0 6px rgba(0,0,0,.55), 0 2px 14px rgba(0,0,0,.35); transition: opacity .5s; }
+  .style-drawn .drawn-line[dir=rtl] { justify-content: flex-start; }
+  .style-drawn .w { display: inline-block; opacity: 0; transform: translateY(8%) scale(.96); transition: opacity .18s ease-out, transform .25s ease-out; }
+  .style-drawn .w.in { opacity: 1; transform: none; }
+
   /* simple */
   .style-simple { display: flex; align-items: center; justify-content: center; }
   .style-simple .simple-line { padding: 0 4%; text-align: center; font-size: clamp(18px, 4vw, 64px); font-weight: 700;

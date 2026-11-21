@@ -5,11 +5,13 @@ import type { LyricStyle } from './styles/types.ts';
 import { StarsStyle } from './styles/stars.ts';
 import { BigStyle } from './styles/big.ts';
 import { SimpleStyle } from './styles/simple.ts';
+import { DrawnStyle } from './styles/drawn.ts';
 
 const STYLES: Record<StyleName, () => LyricStyle> = {
   stars: () => new StarsStyle(),
   big: () => new BigStyle(),
   simple: () => new SimpleStyle(),
+  drawn: () => new DrawnStyle(),
 };
 
 const root = document.getElementById('stage')!;

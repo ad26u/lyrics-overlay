@@ -17,7 +17,7 @@ export type NowPlaying = {
 export type Rect = { x: number; y: number; width: number; height: number };
 export type Bounds = Rect & { displayId: number };
 
-export type StyleName = 'stars' | 'big' | 'simple';
+export type StyleName = 'stars' | 'big' | 'simple' | 'drawn';
 
 export type AppSettings = {
   enabled: boolean;
