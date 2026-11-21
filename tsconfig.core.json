@@ -1,4 +1,18 @@
 {
   "extends": "./tsconfig.json",
-  "include": ["src/shared", "src/main/lyrics", "src/main/playback", "src/main/settings.ts", "src/main/nowplaying/parse.ts", "src/main/orchestrator.ts", "src/main/spotify", "src/renderer/lyrics/text.ts", "src/renderer/lyrics/colors.ts", "tests"]
+  "include": [
+    "src/shared",
+    "src/main/lyrics",
+    "src/main/playback",
+    "src/main/settings.ts",
+    "src/main/nowplaying/parse.ts",
+    "src/main/orchestrator.ts",
+    "src/main/spotify",
+    "src/renderer/lyrics/text.ts",
+    "src/renderer/lyrics/colors.ts",
+    "tests"
+  ],
+  "exclude": [
+    "src/main/spotify/wire.ts"
+  ]
 }
