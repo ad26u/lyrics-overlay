@@ -7,9 +7,8 @@ import { PRELOAD, loadPage } from './pages.ts';
 function defaultBounds(): Bounds {
   const d = screen.getPrimaryDisplay();
   const wa = d.workArea;
-  const width = Math.round(wa.width * 0.6);
-  const height = Math.round(wa.height * 0.3);
-  return { x: wa.x + Math.round((wa.width - width) / 2), y: wa.y + Math.round(wa.height * 0.35 - height / 2), width, height, displayId: d.id };
+  // SPIKE: full work area so the "drawn" style can fill the screen
+  return { x: wa.x, y: wa.y, width: wa.width, height: wa.height, displayId: d.id };
 }
 
 export class LyricsWindow {
