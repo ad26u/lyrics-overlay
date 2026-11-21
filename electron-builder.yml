@@ -1,0 +1,30 @@
+appId: com.ad26u.lyricsoverlay
+productName: Lyrics Overlay
+directories:
+  output: dist
+files:
+  - out/**
+  - package.json
+extraResources:
+  - from: resources/tray.png
+    to: tray.png
+  - from: resources/tray@2x.png
+    to: tray@2x.png
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  extraResources:
+    - from: resources/win-media.exe
+      to: win-media.exe
+nsis:
+  oneClick: true
+  perMachine: false
+mac:
+  target:
+    - target: dmg
+      arch: [arm64]
+  category: public.app-category.music
+  extendInfo:
+    LSUIElement: true
+    NSAppleEventsUsageDescription: "يقرأ الأغنية الحالية من Spotify و Music لعرض الكلمات."

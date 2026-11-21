@@ -4,3 +4,7 @@ out/
 dist/
 .env
 dev/out/
+helpers/win-media/bin/
+helpers/win-media/obj/
+helpers/win-media/publish/
+resources/win-media.exe
